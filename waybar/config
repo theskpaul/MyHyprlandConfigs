@@ -1,3 +1,4 @@
+[
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
@@ -5,48 +6,22 @@
     "spacing": 5, // Gaps between modules (4px)
 
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "memory"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "backlight", "battery", "clock", "keyboard-state", "tray"],
+    "modules-left": ["custom/launcher"],
+"modules-center": ["hyprland/window"],
+    "modules-right": ["network", "pulseaudio", "backlight", "battery", "clock", "custom/power"],
 
     // Modules configuration
-    "hyprland/workspaces": {
-        "format": "{icon}",
-            "on-scroll-up": "hyprctl dispatch workspace e+1",
-            "on-scroll-down": "hyprctl dispatch workspace e-1",
-    },
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 10
-    },
     "clock": {
         "timezone": "India/Kolkata",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "memory": {
-        "format": "{}% "
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%d-%m-%Y}"
     },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+	"tooltip-format": "Current screen brightness {percent}%."
     },
     "battery": {
         "states": {
@@ -71,17 +46,18 @@
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        // "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
+        // "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": " {icon}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        // "format-source": "{volume}% ",
+        // "format-source-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -93,17 +69,48 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    "custom/power": {
+        "format": " LOG OUT ⏻ ",
+	"tooltip": "true",
+	"tooltip-format": "Shut Down, Restart, Suspend, Log out and Lock",
+        "on-click": "wlogout --protocol layer-shell"
+    },
+    "custom/launcher": {
+        "format": "Arch Linux",
+        "tooltip": "true",
+        "tooltip-format": "Launch Programs",
+        "on-click": "wofi --show drun"
+    }
+},
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 35,
+    "spacing": 5,
+    "modules-left": ["custom/brave", "custom/code", "custom/terminal","hyprland/workspaces"],
+    // "modules-center": [],
+    "custom/brave": {
+        "format": "Brave",
+        "tooltip": "true",
+        "tooltip-format": "Brave secure browser",
+        "on-click": "flatpak run com.brave.Browser"
+    },
+    "custom/code": {
+        "format": "Kate",
+        "tooltip": "true",
+        "tooltip-format": "Kate text editor",
+        "on-click": "kate"
+    },
+    "custom/terminal": {
+        "format": "Terminal",
+        "tooltip": "true",
+        "tooltip-format": "Kate text editor",
+        "on-click": "kitty"
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
     }
 }
-
+]
