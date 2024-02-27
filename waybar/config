@@ -11,6 +11,9 @@
     "modules-right": ["network", "pulseaudio", "backlight", "battery", "clock", "custom/power"],
 
     // Modules configuration
+    "hyprland/window": {
+        "max-length": 50
+    },
     "clock": {
         "timezone": "India/Kolkata",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -85,10 +88,10 @@
 {
     "layer": "top",
     "position": "bottom",
-    "height": 35,
+    "height": 38,
     "spacing": 5,
-    "modules-left": ["custom/brave", "custom/code", "custom/terminal","hyprland/workspaces"],
-    // "modules-center": [],
+    "modules-left": ["custom/brave", "custom/code", "custom/terminal", "custom/files", "hyprland/workspaces"],
+    "modules-right": ["tray"],
     "custom/brave": {
         "format": "Brave",
         "tooltip": "true",
@@ -104,8 +107,18 @@
     "custom/terminal": {
         "format": "Terminal",
         "tooltip": "true",
-        "tooltip-format": "Kate text editor",
+        "tooltip-format": "Kitty terminal emulator",
         "on-click": "kitty"
+    },
+    "custom/files": {
+        "format": "Files",
+        "tooltip": "true",
+        "tooltip-format": "Dolphin File Manager",
+        "on-click": "dolphin"
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10,
     },
     "hyprland/workspaces": {
         "format": "{icon}",
